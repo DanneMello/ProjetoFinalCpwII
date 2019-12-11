@@ -1,25 +1,25 @@
 var Game_Over = {
 
     preload : function() {
-        // Here we load all the needed resources for the level.
-        // In our case, that's just two squares - one for the snake body and one for the apple.
+        // Aqui carregamos todos os recursos necessários para o nível.
+        // No nosso caso, são a bolinha para a cobra e o coelho como presa.
         game.load.image('gameover', './assets/images/gameover.png');
     },
 
     create : function() {
 
-        // Create button to start game similar to the main menu.
+        // Botão Criar para iniciar um jogo semelhante ao menu principal.
         this.add.button(0, 0, 'gameover', this.startGame, this);
 
-        // Last Score Info.
-        game.add.text(235, 350, "LAST SCORE", { font: "bold 16px sans-serif", fill: "#46c0f9", align: "center"});
-        game.add.text(350, 348, score.toString(), { font: "bold 20px sans-serif", fill: "#fff", align: "center" });
+        // Informações da última pontuação.
+        game.add.text(235, 350, "PONTUAÇÃO", { font: "bold 16px sans-serif", fill: "#46c0f9", align: "center"});
+        game.add.text(350, 348, score.toString(), { font: "bold 20px sans-serif", fill: "#FF0000", align: "center" });
 
     },
 
     startGame: function () {
 
-        // Change the state to the actual game.
+        // Mude o estado para o jogo real.
         this.state.start('Game');
 
     }

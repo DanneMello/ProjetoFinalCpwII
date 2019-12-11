@@ -1,21 +1,21 @@
 var Menu = {
 
     preload : function() {
-        // Load all the needed resources for the menu.
-        game.load.image('menu', './assets/images/menu.png');
+        // Carregue todos os recursos necessários para o menu.
+        game.load.image('menu', './assets/images/menu5.png');
     },
 
     create: function () {
 
-        // Add menu screen.
-        // It will act as a button to start the game.
+        // Adicionar tela de menu.
+        // Ele atuará como um botão para iniciar o jogo.
         this.add.button(0, 0, 'menu', this.startGame, this);
 
     },
 
     startGame: function () {
 
-        // Change the state to the actual game.
+        // Mude o estado para o jogo real.
         this.state.start('Game');
 
     }
