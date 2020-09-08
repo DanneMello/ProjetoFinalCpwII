@@ -21,34 +21,24 @@ var Game = {
         //game.stage.backgroundColor = '#061f27';
         //game.stage.backgroundColor = '#008000';
         game.stage.backgroundColor = '#008400'; 
-        //"render.transparent"= true;
-
-
-
-  
-        
+        //"render.transparent"= true;       
         //cobra[0] = game.add.sprite(150+i*squareSize, 150, 'cobra');        
         for(var i = 0; i < 10; i++){            
             cobra[i] = game.add.sprite(150+i*squareSize, 150, 'corpo');      // Os parâmetros são (coordenada X, coordenada Y, imagem)
-        }
-        
-        
+        }       
         this.generateCoelho();
         
         textStyle_Key = { font: "bold 14px sans-serif", fill: "#46c0f9", align: "center" };
         textStyle_Value = { font: "bold 18px sans-serif", fill: "#FF0000", align: "center" };
-
         
         game.add.text(30, 20, "SCORE", textStyle_Key);
         scoreTextValue = game.add.text(90, 18, score.toString(), textStyle_Value);
 
         game.add.text(500, 20, "SPEED", textStyle_Key);
         speedTextValue = game.add.text(558, 18, speed.toString(), textStyle_Value);
-
     },
 
     update: function() { 
-
         if (cursors.right.isDown && direction!='left')
         {
             new_direction = 'right';
@@ -66,20 +56,10 @@ var Game = {
             new_direction = 'down';
         }
 
- 
         speed = Math.min(10, Math.floor(score/5));
- 
         speedTextValue.text = '' + speed;
-
-        
- 
         updateDelay++;
-
-        
- 
         if (updateDelay % (10 - speed) == 0) {
-            
- 
             var firstCell = cobra[cobra.length - 1],
                 lastCell = cobra.shift(),
                 oldLastCellx = lastCell.x,
@@ -89,10 +69,8 @@ var Game = {
                 direction = new_direction;
                 new_direction = null;
             }
-
  
             if(direction == 'right'){
-
                 lastCell.x = firstCell.x + 15;
                 lastCell.y = firstCell.y;
             }
@@ -114,38 +92,24 @@ var Game = {
 
             cobra.push(lastCell);
             firstCell = lastCell;
-
-            
- 
             if(addNew){
                 cobra.unshift(game.add.sprite(oldLastCellx, oldLastCelly, 'corpo'));
                 addNew = false;
             }
 
- 
-            this.coelhoCollision();
-           
- 
-            this.selfCollision(firstCell);
-            
- 
-            this.wallCollision(firstCell);
+            this.coelhoCollision();// @Colisão no coelho, continua..
+            this.selfCollision(firstCell);// @Quando colisão na própria cobra, chama a função firstCell
+            this.wallCollision(firstCell);// @Quando colisão no muro, chama a função firstCell
         }
-
-
     },
 
     generateCoelho: function(){
-
         var randomX = Math.floor(Math.random() * 40 ) * squareSize,
             randomY = Math.floor(Math.random() * 30 ) * squareSize;
-        
-
         coelho = game.add.sprite(randomX, randomY, 'coelho');
     },
 
     coelhoCollision: function() {
-
         for(var i = 0; i < cobra.length; i++){
             if(cobra[i].x == coelho.x && cobra[i].y == coelho.y){                
                 addNew = true;
@@ -166,10 +130,8 @@ var Game = {
     },
 
     wallCollision: function(head) {
-
         if(head.x >= 600 || head.x < 0 || head.y >= 450 || head.y < 0){            
             game.state.start('Game_Over');
         }
     }
-
 };
